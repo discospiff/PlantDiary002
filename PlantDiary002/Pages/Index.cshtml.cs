@@ -35,8 +35,12 @@ namespace PlantDiary002.Pages
                 QuickType.Welcome welcome = QuickType.Welcome.FromJson(jsonData);
                 // get the list (collection) of specimens
                 List<QuickType.Specimen> allSpecimens = welcome.Specimens;
+                // make the specimen data available to our web page.
+                ViewData["allSpecimens"] = allSpecimens;
+
                 // iterate over the specimens so we can shake hands with them.
-                foreach(QuickType.Specimen specimen in allSpecimens)
+
+                foreach (QuickType.Specimen specimen in allSpecimens)
                 {
                     // shake hands with one specimen at a time.
                     Console.WriteLine(specimen);
