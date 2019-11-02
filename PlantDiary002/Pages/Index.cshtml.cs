@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
 namespace PlantDiary002.Pages
 {
@@ -18,13 +20,14 @@ namespace PlantDiary002.Pages
             _logger = logger;
         }
 
-        public JsonResult OnGet()
+        public void OnGet()
         {
             String myName = "Brandan Jones";
             int age = 31;
             ViewData["MyName"] = myName;
             ViewData["age"] = age;
             long precip = 0;
+
             // make a collection of ONLY specimens that like water.
             IList<QuickType.Specimen> waterLovingSpecimens = new List<QuickType.Specimen>();
 
@@ -62,10 +65,21 @@ namespace PlantDiary002.Pages
 
                 // get the raw JSON data.
                 string jsonData = webClient.DownloadString("https://www.plantplaces.com/perl/mobile/viewspecimenlocations.pl?Lat=39.14455075&Lng=-84.5093939666667&Range=0.5&Source=location&Version=2");
+
+                // get the schema that will validate this JSON.
+                string schemaString = System.IO.File.ReadAllText("SpecimenSchema.json");
+                // pars the schema into a JSchema object.
+                JSchema schema = JSchema.Parse(schemaString);
+                // quickly read the JSON data into memory.
+                JObject jsonObject = JObject.Parse(jsonData);
+                // see if the JSON data is valid, per the schema.
+                bool valid = jsonObject.IsValid(schema);
+
                 // Marshall the data into a series of objects.
                 QuickType.Welcome welcome = QuickType.Welcome.FromJson(jsonData);
                 // get the list (collection) of specimens
                 List<QuickType.Specimen> allSpecimens = welcome.Specimens;
+                
                 
                 // iterate over the specimens so we can shake hands with them.
                 foreach (QuickType.Specimen specimen in allSpecimens)
@@ -92,7 +106,7 @@ namespace PlantDiary002.Pages
                     ViewData["allSpecimens"] = waterLovingSpecimens;
                 }
             }
-            return new JsonResult(waterLovingSpecimens);
+            
 
         }
     }
