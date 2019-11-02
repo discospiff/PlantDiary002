@@ -29,6 +29,8 @@ namespace PlantDiary002.Pages
             // a web client gives us access to data on the internet.
             using(WebClient webClient = new WebClient())
             {
+                string weatherAPIKey = System.IO.File.ReadAllText("WeatherAPIKey.txt");
+                string weatherData = webClient.DownloadString("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key=" + weatherAPIKey);
                 // get the raw plant metadata
                 string plantData = webClient.DownloadString("http://www.plantplaces.com/perl/mobile/viewplantsjsonarray.pl?WetTolerant=on");
                 // parse to objects
