@@ -18,17 +18,20 @@ namespace PlantDiary002.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public JsonResult OnGet()
         {
             String myName = "Brandan Jones";
             int age = 31;
             ViewData["MyName"] = myName;
             ViewData["age"] = age;
             long precip = 0;
+            // make a collection of ONLY specimens that like water.
+            IList<QuickType.Specimen> waterLovingSpecimens = new List<QuickType.Specimen>();
+
 
             // download the JSON data.
             // a web client gives us access to data on the internet.
-            using(WebClient webClient = new WebClient())
+            using (WebClient webClient = new WebClient())
             {
                 // get our weather data and key
                 string weatherAPIKey = System.IO.File.ReadAllText("WeatherAPIKey.txt");
@@ -64,9 +67,6 @@ namespace PlantDiary002.Pages
                 // get the list (collection) of specimens
                 List<QuickType.Specimen> allSpecimens = welcome.Specimens;
                 
-                // make a collection of ONLY specimens that like water.
-                IList<QuickType.Specimen> waterLovingSpecimens = new List<QuickType.Specimen>();
-                
                 // iterate over the specimens so we can shake hands with them.
                 foreach (QuickType.Specimen specimen in allSpecimens)
                 {
@@ -92,7 +92,7 @@ namespace PlantDiary002.Pages
                     ViewData["allSpecimens"] = waterLovingSpecimens;
                 }
             }
-
+            return new JsonResult(waterLovingSpecimens);
 
         }
     }
