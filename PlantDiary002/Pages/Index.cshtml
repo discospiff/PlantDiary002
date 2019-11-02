@@ -5,6 +5,7 @@
     var name = ViewData["MyName"];
     var age = ViewData["age"];
     List<QuickType.Specimen> allSpecimens = (List<QuickType.Specimen>)ViewData["allSpecimens"];
+    var weatherMessage = ViewData["WeatherMessage"];
 
 }
 
@@ -13,6 +14,7 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>My name @name</p>
     <p>My age @age</p>
+    <h2>@weatherMessage</h2>
     <table>
         <tr>
             <th>Latitude</th>

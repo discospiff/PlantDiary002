@@ -24,13 +24,25 @@ namespace PlantDiary002.Pages
             int age = 31;
             ViewData["MyName"] = myName;
             ViewData["age"] = age;
+            long precip = 0;
 
             // download the JSON data.
             // a web client gives us access to data on the internet.
             using(WebClient webClient = new WebClient())
             {
+                // get our weather data and key
                 string weatherAPIKey = System.IO.File.ReadAllText("WeatherAPIKey.txt");
                 string weatherData = webClient.DownloadString("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key=" + weatherAPIKey);
+
+                // parse to objects
+                QuickTypeWeather.Weather weather = QuickTypeWeather.Weather.FromJson(weatherData);
+                QuickTypeWeather.Datum[] allWeatherData = weather.Data;
+
+                foreach(QuickTypeWeather.Datum datum in allWeatherData)
+                {
+                    precip = datum.Precip;
+                }
+
                 // get the raw plant metadata
                 string plantData = webClient.DownloadString("http://www.plantplaces.com/perl/mobile/viewplantsjsonarray.pl?WetTolerant=on");
                 // parse to objects
@@ -69,9 +81,16 @@ namespace PlantDiary002.Pages
                     }
                 }
 
-                // make the specimen data available to our web page.
-                ViewData["allSpecimens"] = waterLovingSpecimens;
-
+                if (precip < 1)
+                {
+                    ViewData["WeatherMessage"] = "Not much precip; water these water-loving plants.";
+                    // make the specimen data available to our web page.
+                    ViewData["allSpecimens"] = waterLovingSpecimens;
+                } else
+                {
+                    ViewData["WeatherMessage"] = "Lots of rain, these plants will love it!";
+                    ViewData["allSpecimens"] = waterLovingSpecimens;
+                }
             }
 
 
