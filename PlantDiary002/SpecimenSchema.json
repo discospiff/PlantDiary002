@@ -23,22 +23,31 @@
       "additionalProperties": false,
       "properties": {
         "lat": {
-          "type": "number"
+          "type": "number",
+          "maximum": 90,
+          "minimum":  40
         },
         "lng": {
-          "type": "number"
+          "type": "number",
+          "maximum": 180,
+          "minimum": -180
+
         },
         "plant_id": {
-          "type": "integer"
+          "type": "integer",
+          "exclusiveMinimum": 0
         },
         "specimen_id": {
-          "type": "integer"
+          "type": "integer",
+          "exclusiveMinimum": 0
         },
         "common": {
           "type": "string"
         },
         "genus": {
-          "type": "string"
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 65
         },
         "species": {
           "type": "string"
