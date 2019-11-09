@@ -1,0 +1,254 @@
+Module 9: Persistence with WAMP and Spring JPA (10/21 - 10/27)
+19FS Quiz 7: Logging, Exceptions, Iteration
+
+
+
+Which of the following is not an exception:
+
+A. Checked
+
+B. Double Checked
+
+C. Unchecked
+
+Answer: C.
+
+
+In thymeleaf what does th:each="__:${__}" represent
+
+What are two things that you should never do in a catch block? 
+
+Which of the following is a best practice for a Catch block?  (check all that apply)
+
+A) Have it return null.
+B) Never leave it empty. (Ans)
+
+C) Have it log something. (Ans)
+
+D) Have it throw an exception.
+
+
+FileNotFound is ____ exception
+
+Checked
+
+
+Unchecked exceptions should be ______.
+
+What are the logging levels?
+
+A: ERROR/error, WARN/warn, INFO/info, DEBUG/debug, TRACE/trace
+
+Check all that Apply:
+
+Catch blocks should never _______
+
+a. Be left empty
+
+b. return null
+
+c. Catch just to rethrow
+
+d. log results
+
+
+
+What bootstrap class is useful for styling lists?
+
+"ng-for"
+"array-of"
+"list"
+"list-group"
+When handling exceptions it is best to leave  the catch block empty if you cannot handle it. T/F
+
+Which of the following are log levels?
+
+A) ERROR
+
+B) BAD BUG
+
+C) INFO
+
+D) WARN
+
+Answer: A, C, D
+
+What are two diffrences between a Logger, and an Appender?
+
+What type of exception is an ArrayIndexOutOfBoundsException? 
+Unchecked
+
+What is an exception in Java
+
+What are exceptions?
+
+An event where something goes wrong
+
+why do you log in catch blocks?
+
+Question 2:   Short Answer
+Average Score 0 points
+
+Given the material we've covered this week, what is a good question for next week's quiz?
+
+Example Answer
+[None Given]
+
+Unanswered Responses
+0
+
+Given Answers
+What is the Thymeleaf tag that can iterate over an array of values?
+
+th:loop
+th:for
+th:each
+th:forOf
+what does %t show?
+
+Why is it important to use logging practices?
+
+What is the difference between a checked and unchecked exception?
+
+True or False: Showing detailed exceptions is a good best practice.
+
+A. False
+
+What is the difference between a checked and unchecked exception
+
+
+T/F: An exception is when something goes wrong.
+
+Answer: TRUE.
+
+
+What is a logger?
+
+Gathers logging information form the code
+
+Which of the following should be avoided in a Catch block? (check all that apply)
+
+A) Have it throw an exception. (Ans)
+B) Use System.out.println (Ans)
+
+C) Leaving the catch block empty (Ans)
+
+D) Returning null (Ans)
+
+Logging Levels include which of the following?
+
+ERROR/error
+
+WARN/warn
+
+INFO/info
+
+DEBUG/debug
+
+TRACE/trace
+
+(All of them)
+
+What is the syntax for an Exception?
+
+What do we use to implement the json file we have just parsed through
+
+True or False : A logger gathers logging information from code, and an Appender publishes information that has been logged.
+
+
+Answer: True
+
+Which level of logging should be used for everyday occurunce such as log in?
+info
+
+Always give full detail of exception in the UI layer, True or False?
+
+False
+
+
+True or False: An Exception happens when something goes wrong.
+
+A: True
+
+Question 3:   Short Answer
+Average Score 0 points
+
+Given the material we've covered this week, what is a good question for next week's quiz?
+
+Example Answer
+[None Given]
+
+Unanswered Responses
+0
+
+Given Answers
+What is the function of a try catch syntax?
+
+It is considered bad practice to have multiple return statements in one method.
+
+True
+False
+
+Fill in the blank:
+
+Logger __ = LoggerFactory.____(this.getclass()):
+
+Answer: 
+
+Logger log = LoggerFactory.getLogger(this.getclass()):
+
+
+True or False:  A checked exception is when something from the world goes wrong such as a FileNotFound exception, and an unchecked exception is preventable such as a NumberFormatException.
+
+Answer: True
+
+what is the difference between checked and unchecked exceptions.
+
+What is the iteratoin tag in thymeleaf? 
+th:each
+
+From the list Error, Warn, Info, Debug and Trace, Order the items from most granular to least granular in terms of logging. 
+
+What are some different logging methods example: log.info vs log.error
+
+What is one of the exceptions that can be found?
+
+You should use logging rather than System.out.println, True or False?
+
+True
+
+What does an appender do?
+
+A: Publishes information that has been logged
+
+Getting a Logger with spring boot:
+
+Logger log = ________.getLogger(this._____());
+
+Which of the following is NOT a default logger category:
+
+A) ERROR
+
+B) INFO
+
+C) THROW (ans)
+
+D) DEBUG
+
+What is an Exception?
+
+Q. Where can feedback on sprint 1 be found?
+
+A. Retrospective Board
+
+What is an Appender?
+
+Publishes information that has been logged
+
+
+
+I tries to pull our project from Github on a different laptop, but Maven  and ran as Java application options are missing. What I can do to fix it? 
+
+No, I do not have any questions
+
+What is the disadvantage and advantage of logging to a file vs logging to DB? 

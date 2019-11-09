@@ -1,0 +1,278 @@
+The mechanics of the code review are good: branch, pull request, etc.
+
+The rationale discussion in the pull request is outstanding.  Easy to follow your thinking.  Much better than explaining it in comments in code (which is clutter/tech debt).
+
+Really nice review. Appropriate and thorough suggestions that will a) reduce tech debt, and b) help this group to create an awesome application quickly.
+
+I recommend merging these changes.
+
+The pull request looks good.
+
+Work on getting the program to run before doing a code review.  
+1) The best way to learn someone else's code is by debugging it.
+2) You should not add more to a codebase that does not compile.
+3) Don't be afraid to reach out to the group for their advice on how to get the project running, if you're unable to figure it out independently.
+
+Commentary is missing three things you learned from the code review.
+
+The code review is a bit light... I'd like to see a bigger expression of what you know than renaming variables.  Also, as long as you're changing BreedID, make it breedID or breedId.  Either way, it should not start with a capital letter.
+
+Merge Comments:
+
+The changes in this review are relatively minor.  breedId versus breedID is really programmer's preference.  Thus, I feel inclined to not recommend merging this review, as it's not making a material impact on technical debt.
+
+What I would do is change BreedID to breedID.
+
+Inline comments:
+
+Neither, actually.  Variable names in Java should be lowerCamelCase, not UpperCamelCase.
+
+
+It looks like this branch contains a few ideas that were started, but not fully implemented (used) anywhere.  Unused code is clutter that should be removed, which is technical debt.  A code review should decrease, not increase, technical debt.  Thus, I don't recommend merging these changes, unless/until these changes are fully implemented.  
+
+Save this discussion for the pull request (where I am putting this comment; you can have inline conversations here).  It should not be in comments in the source code, because that's clutter, which is technical debt.
+
+Is this variable articles used anywhere?  If not, this line of code is not used... and is clutter, which is technical debt.  On the other hand, if you'd like to propose this as a replacement for another variable, take it all the way through and show how it can be used.
+
+
+A couple of things here... 1) no one is going to see System.out.println. It would be nice if this were a more meaningful contribution to the outcomes. 2) Avoid adding rationale/justification in source code comments. Save that discussion for the pull request, where I am writing this comment. That allows you to have a back and forth conversation without cluttering up the codebase.
+
+While refactoring, this is a good opportunity to move these css styles to an external stylesheet.
+
+
+Many good suggestions here worth merging.  I recommend that the team clone this branch, review changes, and merge them.
+
+Good callout here.
+
+Does the implementing class throw an Exception?  If so, then yes, add this.  If not, then no.
+
+I could go either way on this.  I tend to use field injection... it's usually injected when needed, and de-clutters the constructor.  The trick is, if your constructor is full of parameters, and then you subclass this class, you have to deal with a nasty super() call to satisfy those parameters.
+
+Yes, definitely.  And remove the hardcoded path in the form submit... this will be meaningless once this is deployed somewhere!  Use relative path instead.
+
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Work on getting the program to run before doing a code review.  
+1) The best way to learn someone else's code is by debugging it.
+2) You should not add more to a codebase that does not compile.
+3) Don't be afraid to reach out to the group for their advice on how to get the project running, if you're unable to figure it out independently.
+
+My merge comments:
+==================
+
+The updates to the test method names are worth merging.
+I don't recommend merging the other changes, as they are increasing technical debt.
+
+My inline comments:
+===================
+
+
+These aren't used anywhere, so this is unused code, which is technical debt.
+
+Don't put discussion/rationale in source code.  That's clutter, which is also technical debt.  Discussion belongs in the pull request, where I am writing this statement.
+
+Good changes... but again, don't put discussion/rationale in source code comments.  In the pull request, you can have a conversation with multiple parties, without cluttering up code.
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Good writeup.
+
+I would like to see more changes committed.   Creating a new folder is only really one change, and can't be tested without a working project.
+
+It looks like you did a bit of work to try to get the program to run, which is grerat.  None the less, it's worth getting it to run before doing a code review.  
+1) The best way to learn someone else's code is by debugging it.
+2) You should not add more to a codebase that does not compile.
+3) Don't be afraid to reach out to the group for their advice on how to get the project running, if you're unable to figure it out independently.
+
+My merge comments:
+
+A resources folder is a good idea.  The group can implement this manually instead of merging it.
+
+
+
+The pull request looks good.
+
+Work on getting the program to run before doing a code review.  
+1) The best way to learn someone else's code is by debugging it.
+2) You should not add more to a codebase that does not compile.
+3) Don't be afraid to reach out to the group for their advice on how to get the project running, if you're unable to figure it out independently.
+
+I'd like to see a bit more description on what you learned from this review.
+
+My merge comments:
+
+Several good suggestions here, but I would merge them manually.  Since these changes were created on a branch that does not compile, there's a chance that the changes do not compile as well... which is why they should be reviewed and implemented manually.  
+
+My inline comments:
+
+DI is likely correct here: Dependency Injection.
+
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Really nice writeup.  Easy to read.  The ability to communicate technical concepts is valuable!
+
+My merge comments:
+
+Many good suggestions here, which adhere to common naming conventions.  This review reduces the technical debt of this program.  I recommend merging these changes.
+
+
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Really nice writeup.  Easy to read.  The ability to communicate technical concepts is valuable!
+
+My merge comments:
+
+Several good changes here that reduce technical debt and move the program closer to commonly accepted standards.  I recommend merging this bran
+
+My Inline comments:
+
+I'd... maybe call this method index()
+
+Linked stylesheet is a good idea... better than inline, because you can use it across multiple pages.
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+My merge comments:
+==================
+
+Several changes here worth reviewing:
+1) The method rename: I'd either leave it as is, or change it to index()
+2) The values for days of the week look good.  I've seen this in other code reviews as well.
+3) Proper formatting: always a good idea.
+I recommend manually merging what you would like to use.
+
+Inline comments:
+================
+I'd just call this index()  
+It's not necessarily redirecting.
+
+When reformatting, make one commit specific for the reformat, then make any other changes in a separate commit.  This makes it easier to see what changed.
+
+As long as you're here, move this to a linked style sheet.
+
+
+You've submitted a branch, not a pull request... you should take this all the way to pull request.  
+
+Without a pull request, there's not a writeup.... and I don't have a good handle on the rationale for your changes.   It's also more difficult to have a conversation around the changes.
+
+ It looks like new pages, but I don't see them wired up to the controller.  Without that, it's unused code, which is clutter.  If you start on a concept, take it all the way through before committing and pushing.  
+
+On the other hand, a code review should really be based on existing code, not adding net new code.  That runs the risk of increasing technical debt.
+
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Nice writeup.  
+
+Merge Comments:
+===============
+
+Many good suggestions worth merging.  Separate, linked CSS and JS files are always a good idea.
+One note before merging: it looks like the custom.js file may have mistakenly been left out of this branch, because I don't see it.  If merging, be sure to include that file.
+
+Inline Comments:
+================
+
+Linked style sheets are always a good idea (over inline or embedded).
+
+Did you remember to add and commit this custom.js file before pushing the branch?  Cuz I don't see it anywhere....
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Writeup is very good.
+
+Merge Comments:
+===============
+
+There are many good suggestions here, but I think one can take a different approach to resolving technical debt, which will be more effective.   See my inline comments. Thus, I don't recommend merging this branch.
+
+Inline Comments:
+================
+
+This is a huge method signature, so I'd refactor it entirely.
+- Have it accept an Item object only.
+- Create the Item object separately... perhaps using a Builder pattern.
+
+Put discussion/rationale in the pull request... not in source code.  It's clutter in source code, and clutter is technical debt.
+
+Going by this, it looks like part number is alphanumeric.  So, instead of changing the data type to int, change the variable name to something else, like partCode.
+
+
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Really nice writeup.  Easy to read, well formatted.  The ability to communicate technical concepts is valuable!
+
+Inline comments are very good as well.  Excellent way to have a conversation around rationale.
+
+Merge Comments:
+===============
+Very thorough code review.  I recommend merging changes.
+But first... this is one of the first code reviews I've seen where there is extraordinary value in the inline comments/rationale discussion in the pull request.  I highly recommend that the group give those a good read, and then consider implementing them manually or merging the entire branch.  
+
+Inline Comments:
+================
+Nice suggestion.
+
+Good catch... correct!
+
+I agree... good point.
+
+
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Work on getting the program to run before doing a code review.  
+1) The best way to learn someone else's code is by debugging it.
+2) You should not add more to a codebase that does not compile.
+3) Don't be afraid to reach out to the group for their advice on how to get the project running, if you're unable to figure it out independently.
+
+I'd like to see more solid techical changes in this code review, based on what the group has already done; not net new work.  There's a lot of discussion in the source code (where it does not belong), but not much in meaningful technical suggestions that reduce tech debt.
+
+Merge Comments:
+===============
+This branch introduces a bit of technical debt (unused/empty classes; discussion in source code).  A code review should reduce technical debt.  Thus, I don't recommend merging this branch.
+
+Inline Comments:
+================
+
+Hmmmmm.  This looks like an empty class, which is clutter.  Clutter is tech debt.  If you create this class, integrate it with the program so that it has a purpose.
+
+Save this discussion for the pull request (where I am putting this comment; you can have inline conversations here).  It should not be in comments in the source code, because that's clutter, which is technical debt.
+
+Looks like it's still mav here???
+
+
+The mechanics of the code review are good: branch, pull request, etc.
+
+Work on getting the program to run before doing a code review.  
+1) The best way to learn someone else's code is by debugging it.
+2) You should not add more to a codebase that does not compile.
+3) Don't be afraid to reach out to the group for their advice on how to get the project running, if you're unable to figure it out independently.
+
+Merge Comments:
+===============
+
+Good contribution on the test cases.  Those are worth merging.
+Renames: I'm indifferent on those changes.  I'd look at a different approach.
+Since the reviewer was unable to get the project to compile, I'd merge these manually, as opposed to an automatic merge from pull request.
+
+Inline Comments:
+================
+Always use curlies... even if only one line.
+
+Since you're already in a class named ItemDTO, just drop the name item from attributes entirely.   Don't worry about changing it to part.
+
+Nice expansion of tests.
+
