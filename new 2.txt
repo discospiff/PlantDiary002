@@ -1,0 +1,23 @@
+Clifton, Ethan (cliftoea)
+Thu 10/17/2019 10:46 PM
+Prof. Jones,
+
+I have been having severe complications with my VM lately, and the issues isn't within the VM itself. I seldom get sandbox open, even if I do the "Connect to Remote Console" does nothing and remote desktop just fails out. I feel like I am running out of options. Any suggestions?
+
+Thank you.
+
+Sincerely,
+Ethan Clifton
+Information Technology
+Class of 2020
+
+
+Schneider, David (schnedd)
+Thu 10/17/2019 1:58 PM
+Mr. Jones,
+
+I apologize for contacting you so abruptly however my virtual machine got a blue screen and is now not responding or allowing me to log on. It seems to be stuck on the bootup screen and I wanted to seek your guidance before I accidentally dump the information from my machine in some accident.
+
+Thanks for the help,
+
+David Schneider

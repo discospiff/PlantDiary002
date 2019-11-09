@@ -31,83 +31,89 @@ namespace PlantDiary002.Pages
             // make a collection of ONLY specimens that like water.
             IList<QuickType.Specimen> waterLovingSpecimens = new List<QuickType.Specimen>();
 
+            // get our weather data and key
+            string weatherAPIKey = System.IO.File.ReadAllText("WeatherAPIKey.txt");
+            string weatherData = GetData("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key=" + weatherAPIKey);
 
-            // download the JSON data.
-            // a web client gives us access to data on the internet.
-            using (WebClient webClient = new WebClient())
+            // parse to objects
+            QuickTypeWeather.Weather weather = QuickTypeWeather.Weather.FromJson(weatherData);
+            QuickTypeWeather.Datum[] allWeatherData = weather.Data;
+
+            foreach(QuickTypeWeather.Datum datum in allWeatherData)
             {
-                // get our weather data and key
-                string weatherAPIKey = System.IO.File.ReadAllText("WeatherAPIKey.txt");
-                string weatherData = webClient.DownloadString("https://api.weatherbit.io/v2.0/current?&city=Cincinnati&country=USA&key=" + weatherAPIKey);
+                precip = datum.Precip;
+            }
 
-                // parse to objects
-                QuickTypeWeather.Weather weather = QuickTypeWeather.Weather.FromJson(weatherData);
-                QuickTypeWeather.Datum[] allWeatherData = weather.Data;
+            // get the raw plant metadata
+            string plantData = GetData("http://www.plantplaces.com/perl/mobile/viewplantsjsonarray.pl?WetTolerant=on");
+            // parse to objects
+            QuickTypePlant.Plant[] allPlants = QuickTypePlant.Plant.FromJson(plantData);
 
-                foreach(QuickTypeWeather.Datum datum in allWeatherData)
-                {
-                    precip = datum.Precip;
-                }
+            // put our plant definitions in a dictionary.
+            IDictionary<long, QuickTypePlant.Plant> plantDictionary = new Dictionary<long, QuickTypePlant.Plant>();
 
-                // get the raw plant metadata
-                string plantData = webClient.DownloadString("http://www.plantplaces.com/perl/mobile/viewplantsjsonarray.pl?WetTolerant=on");
-                // parse to objects
-                QuickTypePlant.Plant[] allPlants = QuickTypePlant.Plant.FromJson(plantData);
+            // populate our dictionary (assign seats in our aircraft)
+            foreach(QuickTypePlant.Plant plant in allPlants)
+            {
+                plantDictionary.Add(plant.Id, plant);
+            }
 
-                // put our plant definitions in a dictionary.
-                IDictionary<long, QuickTypePlant.Plant> plantDictionary = new Dictionary<long, QuickTypePlant.Plant>();
+            // get the raw JSON data.
+            string jsonData = GetData("https://www.plantplaces.com/perl/mobile/viewspecimenlocations.pl?Lat=39.14455075&Lng=-84.5093939666667&Range=0.5&Source=location&Version=2");
 
-                // populate our dictionary (assign seats in our aircraft)
-                foreach(QuickTypePlant.Plant plant in allPlants)
-                {
-                    plantDictionary.Add(plant.Id, plant);
-                }
+            // get the schema that will validate this JSON.
+            string schemaString = System.IO.File.ReadAllText("SpecimenSchema.json");
+            // pars the schema into a JSchema object.
+            JSchema schema = JSchema.Parse(schemaString);
+            // quickly read the JSON data into memory.
+            JObject jsonObject = JObject.Parse(jsonData);
+            // see if the JSON data is valid, per the schema.
+            bool valid = jsonObject.IsValid(schema);
 
-                // get the raw JSON data.
-                string jsonData = webClient.DownloadString("https://www.plantplaces.com/perl/mobile/viewspecimenlocations.pl?Lat=39.14455075&Lng=-84.5093939666667&Range=0.5&Source=location&Version=2");
-
-                // get the schema that will validate this JSON.
-                string schemaString = System.IO.File.ReadAllText("SpecimenSchema.json");
-                // pars the schema into a JSchema object.
-                JSchema schema = JSchema.Parse(schemaString);
-                // quickly read the JSON data into memory.
-                JObject jsonObject = JObject.Parse(jsonData);
-                // see if the JSON data is valid, per the schema.
-                bool valid = jsonObject.IsValid(schema);
-
-                // Marshall the data into a series of objects.
-                QuickType.Welcome welcome = QuickType.Welcome.FromJson(jsonData);
-                // get the list (collection) of specimens
-                List<QuickType.Specimen> allSpecimens = welcome.Specimens;
+            // Marshall the data into a series of objects.
+            QuickType.Welcome welcome = QuickType.Welcome.FromJson(jsonData);
+            // get the list (collection) of specimens
+            List<QuickType.Specimen> allSpecimens = welcome.Specimens;
                 
                 
-                // iterate over the specimens so we can shake hands with them.
-                foreach (QuickType.Specimen specimen in allSpecimens)
-                {
-                    // shake hands with one specimen at a time.
-                    Console.WriteLine(specimen);
+            // iterate over the specimens so we can shake hands with them.
+            foreach (QuickType.Specimen specimen in allSpecimens)
+            {
+                // shake hands with one specimen at a time.
+                Console.WriteLine(specimen);
 
-                    // see if this specimen likes water.
-                    if (plantDictionary.ContainsKey(specimen.PlantId) )
-                    {
-                        // we are only here if the plant dictionary contains the plant that is associated with this specimen.
-                        waterLovingSpecimens.Add(specimen);
-                    }
-                }
-
-                if (precip < 1)
+                // see if this specimen likes water.
+                if (plantDictionary.ContainsKey(specimen.PlantId) )
                 {
-                    ViewData["WeatherMessage"] = "Not much precip; water these water-loving plants.";
-                    // make the specimen data available to our web page.
-                    ViewData["allSpecimens"] = waterLovingSpecimens;
-                } else
-                {
-                    ViewData["WeatherMessage"] = "Lots of rain, these plants will love it!";
-                    ViewData["allSpecimens"] = waterLovingSpecimens;
+                    // we are only here if the plant dictionary contains the plant that is associated with this specimen.
+                    waterLovingSpecimens.Add(specimen);
                 }
             }
+
+            if (precip < 1)
+            {
+                ViewData["WeatherMessage"] = "Not much precip; water these water-loving plants.";
+                // make the specimen data available to our web page.
+                ViewData["allSpecimens"] = waterLovingSpecimens;
+            } else
+            {
+                ViewData["WeatherMessage"] = "Lots of rain, these plants will love it!";
+                ViewData["allSpecimens"] = waterLovingSpecimens;
+            }
+            
             
 
+        }
+    
+        public string GetData(string endpoint)
+        {
+            string downloadedData = "";
+            using (WebClient webClient = new WebClient())
+            {
+                downloadedData = webClient.DownloadString(endpoint);
+                
+            }
+            return downloadedData;
         }
     }
 }
