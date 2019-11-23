@@ -61,15 +61,27 @@ namespace PlantDiary002.Pages
             settings.ValidationEventHandler += new System.Xml.Schema.ValidationEventHandler(this.ValidationEventHandler);
 
             XmlReader xmlReader = XmlReader.Create(file, settings);
-            while (xmlReader.Read())
+            try
             {
+                while (xmlReader.Read())
+                {
 
+                }
+                ViewData["result"] = "Validated!";
             }
+            catch (Exception e)
+            {
+                // we only get here if there is a validation error.
+                ViewData["result"] = e.Message;
+            }
+
+
         }
 
         private void ValidationEventHandler(object sender, ValidationEventArgs args)
         {
             result = "validation failed.  Message: " + args.Message;
+            throw new Exception("validation failed.  Message: " + args.Message);
         }
     }
 }
