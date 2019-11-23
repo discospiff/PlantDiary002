@@ -6,22 +6,39 @@
     <title>My Favorite Plants</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
     <link rel="stylesheet" href="css/mobile.css" media="screen and  (max-device-width: 480px)" type="text/css" />
+    <!-- jquery -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Combined_Name").autocomplete({
+                source: ["Redbud", "Red Maple", "Red Oak", "Red Rose"],
+                minLength: 3
+            });
+        });
+    </script>
+
 </head>
 <body>
     <div id="topnav">
         <a href="#"><img src="images/ic_home.png" alt="Back to Home" /></a>
         <a href="http://plantplaces.com/perl/SearchPlants.pl"><img src="images/ic_search.png" alt="Search for Plants" /></a>
+        <!-- form action="#" method="get"><input name="text" id="Combined_name" placeholder="Enter a Plant Name"/></form-->
     </div>
     <div id="content">
         <h1>Welcome to my Page!</h1>
         More to come in the near future.
         <form action="http://plantplaces.com/perl/viewplants.pl" method="get">
-            <input name="Combined_Name" type="text" placeholder="Enter Plant Name"/>
-            <input type="submit"/>
+            <input name="Combined_Name" type="text" placeholder="Enter Plant Name" id="Combined_Name" />
+            <input type="submit" />
         </form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <em>What can you do with this site:</em>
         <ul class="list-group">
             <li class="list-group-item active">Look for plants</li>
